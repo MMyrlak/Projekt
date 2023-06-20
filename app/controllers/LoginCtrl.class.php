@@ -7,21 +7,27 @@
 
 namespace app\controllers;
 
+use core\Message;
+use core\Utils;
+use core\App;
 use app\forms\LoginForm;
 
 class LoginCtrl {
     private $form;
+    private $hide_intro;
     	
 	public function validate() {
-		Echo "pozniej";
+		$this->form->login = getFromRequest('login');
+                $this->form->pass = getFromRequest('password');
 	}
 
 	public function action_loginView(){
-		$this->generateView(); 
+            $this->hide_intro = true;
+            $this->generateView(); 
 	}
 	
 	public function action_login(){	
-            Echo "pozniej";
+            $this->generateView(); 
 	}
 	
 //	public function action_logout(){
@@ -30,6 +36,8 @@ class LoginCtrl {
 //	}	
 	
 	public function generateView(){
+                App::getSmarty()->assign('hide_intro',$this->hide_intro);
+                App::getSmarty()->assign('form',$this->form);
 		App::getSmarty()->display('LoginView.tpl');		
 	}
     

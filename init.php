@@ -18,7 +18,7 @@ $_PARAMS = array(); #global array for parameters from clean URL
 $conf = new Config();
 
 # ---- Basic URL options - rather constant
-$conf->clean_urls = true;           # turn on pretty urls
+$conf->clean_urls = false;           # turn on pretty urls
 $conf->action_param = 'action';     # action parameter name (not needed for clean_urls)
 $conf->action_script = '/ctrl.php'; # front controller with location
 

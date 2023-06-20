@@ -12,8 +12,12 @@ use core\Utils;
  * @author Przemysław Kudłacik
  */
 class WorkoutList {
-    
+    private $hide_intro;
+    public function __construct() {
+        $hide_intro = false;
+    }
     public function action_workoutListShow() {
+        App::getSmarty()->assign('hide_intro',$this->hide_intro);
         App::getSmarty()->display("workoutList.tpl");
     }
     
