@@ -2,7 +2,7 @@
 
 namespace app\forms;
 
-class LoginForm {
+class RegisterForm {
 	public $login;
 	public $password;
         public $email;
