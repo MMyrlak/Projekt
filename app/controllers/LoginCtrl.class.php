@@ -14,7 +14,7 @@ use app\forms\LoginForm;
 
 class LoginCtrl {
     private $form;
-    private $hide_intro;
+    private $forms_view;
     	
 	public function validate() {
 		$this->form->login = getFromRequest('login');
@@ -36,7 +36,7 @@ class LoginCtrl {
 //	}	
 	
 	public function generateView(){
-                App::getSmarty()->assign('hide_intro',$this->hide_intro);
+                App::getSmarty()->assign('forms_view',$this->forms_view);
                 App::getSmarty()->assign('form',$this->form);
 		App::getSmarty()->display('LoginView.tpl');		
 	}

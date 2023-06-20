@@ -10,8 +10,8 @@
                     <input type="text" name="login" id="login" value="" placeholder="Wpisz login"/>
                 </div>
                 <div class="col-8">
-                    <label for="name">Has³o</label>
-                    <input type="password" name="password" id="password" value="" placeholder="Wpisz has³o"/>
+                    <label for="name">Haslo</label>
+                    <input type="password" name="password" id="password" value="" placeholder="Wpisz haslo"/>
                 </div>
                 <div class="col-8">
                     <ul class="actions">

@@ -3383,7 +3383,7 @@ input, select, textarea {
 /* Banner */
 
 	#banner {
-		padding: 10em 0 4.75em 0 ;
+		padding: 5em 0 0.5em 0;
 	}
 
 		#banner .inner {

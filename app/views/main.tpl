@@ -24,21 +24,22 @@
             <div class="inner">
                 <h2>Menu</h2>
                 <ul class="links">
-                    <li><a href="{$conf->action_url}loginView">Log In</a></li>
-                    <li><a href="{$conf->action_url}registerView">Sign Up</a></li>
+                    {if forms_view}
+                    <li><a href="{$conf->action_url}workoutListShow">Wróć</a></li>
+                    {/if}
+                    <li><a href="{$conf->action_url}loginView">Zaloguj</a></li>
+                    <li><a href="{$conf->action_url}registerView">Zarejestruj</a></li>
                 </ul>
 		<a href="#" class="close">Close</a>
             </div>
         </nav>
                 
     <!-- LOGO -->
-    {if !$hide_intro}
     <section id="banner">
         <div class="inner">
             <h2>Workout World</h2>
         </div>
     </section>
-    {/if}
     
         {block name=top}Default page content{/block}
         {block name=bottom} Default page content{/block}
