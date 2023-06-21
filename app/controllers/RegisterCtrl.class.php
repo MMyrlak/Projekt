@@ -8,53 +8,68 @@
 namespace app\controllers;
 
 use app\forms\RegisterForm;
-
 use core\Message;
-use core\Utils;
+use core\ParamUtils;
 use core\App;
 
 class RegisterCtrl {
     private $form;
     private $forms_view;
-
+    private $val;
     public function __construct(){
 		$this->form = new RegisterForm();
-                $this->hide_intro = false;
+                $this->forms_view = true;
+                $this->form->login = "";
+                $this->form->email = "";
+                $this->val = false;
 	}
     public function validate() {
-            $this->form->login = getFromRequest('login');
-            $this->form->pass = getFromRequest('password');
-            $this->form->email = getFromRequest('email');
+            $this->form->login = ParamUtils::getFromRequest('login');
+            $this->form->pass = ParamUtils::getFromRequest('password');
+            $this->form->email = ParamUtils::getFromRequest('email');
             
-            if(!isset($this->form->login)){
-                App::getMessages()->addMessage("Brak loginu");
-                return false;
+             if($this->form->email==""){
+                App::getMessages()->addMessage(new \core\Message("Brak e-mail", \core\Message::ERROR));
             }
-            if(!isset($this->form->pass)){
-                App::getMessages()->addMessage("Brak hasla");
-                return false;
+            if($this->form->login==""){
+                App::getMessages()->addMessage(new \core\Message("Brak loginu", \core\Message::ERROR));
             }
-            if(!isset($this->form->login)){
-                App::getMessages()->addMessage("Brak emailu");
-                return false;
-            }
-            return true;
+            if($this->form->pass==""){
+                App::getMessages()->addMessage(new \core\Message("Brak hasla", \core\Message::ERROR));
+            }   
+            $this->val = App::getMessages()->isEmpty();
+            return $this->val;
 	}
 
 	public function action_registerView(){
-            $this->hide_intro = true;
             $this->generateView(); 
 	}
 	
 	public function action_register(){
             if($this->validate()){
-                echo "123";
+               try{ App::getDB()->insert("users",[
+                        "login" => $this->form->login,
+                        "password" => hash('sha256', $this->form->pass),
+                        "mail" => $this->form->email,
+                        "role" => "user"
+                       ]);
+               
+               } catch (\PDOException $ex) {
+                App::getMessages()->addMessage(new \core\Message($ex, \core\Message::WARNING));
+            }
+                App::getMessages()->addMessage(new \core\Message("Zarejestrowany", \core\Message::INFO));
+                $this->forms_view = false;
+                $this->generateView();
+            } else {
+                $this->generateView();
             }
 	}
 	public function generateView(){
+                App::getSmarty()->assign('msgs', App::getMessages()->getMessages());
                 App::getSmarty()->assign('forms_view',$this->forms_view);
 		App::getSmarty()->assign('form',$this->form); // dane formularza do widoku
-		App::getSmarty()->display('RegisterView.tpl');		
+                if($this->val) App::getSmarty()->display('workoutList.tpl');
+                else App::getSmarty()->display('RegisterView.tpl');		
 	}
     
 }

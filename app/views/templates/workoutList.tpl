@@ -1,5 +1,5 @@
 {extends file="main.tpl"}
-{block name=top} {include file='messages.tpl'} {/block}
+{block name=top}  {include file='messages.tpl'} {/block}
 {block name=bottom}
     <div class="wrapper">
         <div class="inner">

@@ -7,38 +7,72 @@
 
 namespace app\controllers;
 
-use core\Message;
-use core\Utils;
-use core\App;
 use app\forms\LoginForm;
+use core\Message;
+use core\Validator;
+use core\App;
+use app\transfer\User;
 
 class LoginCtrl {
     private $form;
     private $forms_view;
-    	
+    private $records;
+    private $user;
+    public function __construct(){
+		$this->form = new LoginForm();
+                $this->forms_view = true;
+                $this->val = false;
+        }
 	public function validate() {
-		$this->form->login = getFromRequest('login');
-                $this->form->pass = getFromRequest('password');
+                $v = new Validator();
+		$this->form->login = $v->validateFromRequest("login", [
+                                'required' => true,
+                                'required_message' => 'Login jest wymagany',
+                                'validator_message' => 'Brak loginu'
+                              ]);
+                $this->form->pass = $v->validateFromRequest("password", [
+                                'required' => true,
+                                'required_message' => 'Haslo jest wymagane',
+                                'validator_message' => 'Brak loginu'
+                              ]);
+                
+            $this->val = App::getMessages()->isEmpty();
+            return $this->val;
 	}
 
 	public function action_loginView(){
-            $this->hide_intro = true;
             $this->generateView(); 
 	}
 	
 	public function action_login(){	
-            $this->generateView(); 
+            if($this->validate()){
+                $records = App::getDB()->select("users", "*", [
+                        "login" => $this->form->login
+                ]);
+                if(count($records) == 1 && $records[0]["password"]==hash('sha256', $this->form->pass)){
+                    $this->user = new User($records[0]["login"],$records[0]["role"],$records[0]["mail"]);
+                    $_SESSION['user'] = serialize($this->user);
+                } else {
+                    App::getMessages()->addMessage(new \core\Message("Niepoprawne haslo lub login", \core\Message::ERROR));
+                    $this->val = false;
+                }
+            }
+            $this->generateView();
 	}
 	
-//	public function action_logout(){
-//		session_destroy();
-//		redirectTo('hello');
-//	}	
+	public function action_logout(){
+		session_destroy();
+		redirectTo('workoutList');
+	}	
 	
 	public function generateView(){
                 App::getSmarty()->assign('forms_view',$this->forms_view);
                 App::getSmarty()->assign('form',$this->form);
-		App::getSmarty()->display('LoginView.tpl');		
+                App::getSmarty()->assign('msgs', App::getMessages()->getMessages());
+                App::getSmarty()->assign('forms_view',$this->forms_view);
+		App::getSmarty()->assign('form',$this->form); // dane formularza do widoku
+                if($this->val) App::getSmarty()->display('workoutList.tpl');
+                else App::getSmarty()->display('LoginView.tpl');
 	}
     
 }

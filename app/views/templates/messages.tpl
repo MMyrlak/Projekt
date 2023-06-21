@@ -1,8 +1,11 @@
-{if $msgs->isInfo()}
-        <ul>
-        {foreach $msgs->getMessages() as $msg}
-            <li>{$msg->text}</li>
-        {/foreach}
+{if true}
+ <div class="alert succes">
+        <ul class="alt">
+            {foreach $msgs as $msg}
+                {strip}
+                    <li>{$msg->text}</li>
+                {/strip}
+            {/foreach}
         </ul>
+ </div>
 {/if}
-

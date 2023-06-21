@@ -24,11 +24,17 @@
             <div class="inner">
                 <h2>Menu</h2>
                 <ul class="links">
-                    {if forms_view}
-                    <li><a href="{$conf->action_url}workoutListShow">Wróć</a></li>
+                    {if $forms_view}
+                        <li><a href="{$conf->action_url}workoutListShow">Wróć</a></li>
                     {/if}
-                    <li><a href="{$conf->action_url}loginView">Zaloguj</a></li>
+                    {if !isset($user->role)}
+                    <li><a href="{url action='loginView'}">Zaloguj</a></li>
                     <li><a href="{$conf->action_url}registerView">Zarejestruj</a></li>
+                    {else}
+                    <li><a href="#">TBA</a></li>
+                    <li><a href="#">TBA</a></li>
+                    <li><a href="{url action='logout'}">Wyloguj</a></li>
+                    {/if}
                 </ul>
 		<a href="#" class="close">Close</a>
             </div>
@@ -40,9 +46,10 @@
             <h2>Workout World</h2>
         </div>
     </section>
-    
-        {block name=top}Default page content{/block}
+    <div class="inner">
+        {block name=top}{/block}
         {block name=bottom} Default page content{/block}
+    </div>
     <!-- Footer -->
         <section id="footer">
             <div class="inner">

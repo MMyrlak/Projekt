@@ -8,6 +8,7 @@ App::getRouter()->setLoginRoute('login'); #action to forward if no permissions
 
 Utils::addRoute('workoutListShow', 'WorkoutList');
 Utils::addRoute('login', 'LoginCtrl');
+Utils::addRoute('logout', 'LoginCtrl');
 Utils::addRoute('register', 'RegisterCtrl');
 Utils::addRoute('loginView', 'LoginCtrl');
 Utils::addRoute('registerView', 'RegisterCtrl');
