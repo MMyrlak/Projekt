@@ -8,10 +8,10 @@
 namespace app\controllers;
 
 use app\forms\LoginForm;
+use app\transfer\User;
 use core\Message;
 use core\Validator;
 use core\App;
-use app\transfer\User;
 
 class LoginCtrl {
     private $form;
@@ -44,7 +44,11 @@ class LoginCtrl {
             $this->generateView(); 
 	}
 	
-	public function action_login(){	
+	public function action_login(){
+            if(session_status()==2){
+                $this->val=true;
+                $this->generateView();
+            }
             if($this->validate()){
                 $records = App::getDB()->select("users", "*", [
                         "login" => $this->form->login
@@ -52,6 +56,8 @@ class LoginCtrl {
                 if(count($records) == 1 && $records[0]["password"]==hash('sha256', $this->form->pass)){
                     $this->user = new User($records[0]["login"],$records[0]["role"],$records[0]["mail"]);
                     $_SESSION['user'] = serialize($this->user);
+                    $this->forms_view = false;
+                    App::getSmarty()->assign('user',unserialize($_SESSION['user']));
                 } else {
                     App::getMessages()->addMessage(new \core\Message("Niepoprawne haslo lub login", \core\Message::ERROR));
                     $this->val = false;
@@ -62,7 +68,9 @@ class LoginCtrl {
 	
 	public function action_logout(){
 		session_destroy();
-		redirectTo('workoutList');
+                $this->forms_view = false;
+                $this->val = true;
+                $this->generateView();
 	}	
 	
 	public function generateView(){

@@ -14,6 +14,7 @@
     <!-- Header -->
         <header id="header" class="alt">
             <h1>Workout World</h1>
+            
             <nav>
                 <a href="#menu">Menu</a>
             </nav>
@@ -30,8 +31,12 @@
                     {if !isset($user->role)}
                     <li><a href="{url action='loginView'}">Zaloguj</a></li>
                     <li><a href="{$conf->action_url}registerView">Zarejestruj</a></li>
-                    {else}
+                    {elseif $user->role == "user"}
+                    <li><a href="#">user</a></li>
                     <li><a href="#">TBA</a></li>
+                    <li><a href="{url action='logout'}">Wyloguj</a></li>
+                    {elseif $user->role == "admin"}
+                    <li><a href="#">admin</a></li>
                     <li><a href="#">TBA</a></li>
                     <li><a href="{url action='logout'}">Wyloguj</a></li>
                     {/if}

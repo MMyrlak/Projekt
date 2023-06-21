@@ -47,7 +47,8 @@ class RegisterCtrl {
 	
 	public function action_register(){
             if($this->validate()){
-               try{ App::getDB()->insert("users",[
+               try{ 
+                   App::getDB()->insert("users",[
                         "login" => $this->form->login,
                         "password" => hash('sha256', $this->form->pass),
                         "mail" => $this->form->email,
