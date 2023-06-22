@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{$conf->app_url}/assets/css/main.css" />
     <link rel="stylesheet" href="{$conf->app_url}/assets/css/own.css" />
     <noscript><link rel="stylesheet" href="{$conf->app_url}/assets/css/noscript.css" /></noscript>
+    <script src="https://kit.fontawesome.com/cfee8e482b.js" crossorigin="anonymous"></script>
 </head>
 <body class="is-preload">
     <!-- Page Wrapper -->
@@ -14,7 +15,6 @@
     <!-- Header -->
         <header id="header" class="alt">
             <h1>Workout World</h1>
-            
             <nav>
                 <a href="#menu">Menu</a>
             </nav>
@@ -26,18 +26,17 @@
                 <h2>Menu</h2>
                 <ul class="links">
                     {if $forms_view}
-                        <li><a href="{$conf->action_url}workoutListShow">Wróć</a></li>
+                        <li><a href="{url action='workoutListShow'}">Wróć</a></li>
                     {/if}
                     {if !isset($user->role)}
                     <li><a href="{url action='loginView'}">Zaloguj</a></li>
-                    <li><a href="{$conf->action_url}registerView">Zarejestruj</a></li>
+                    <li><a href="{url action='registerView'}">Zarejestruj</a></li>
                     {elseif $user->role == "user"}
-                    <li><a href="#">user</a></li>
+                    <li><a href="#">Konto</a></li>
                     <li><a href="#">TBA</a></li>
                     <li><a href="{url action='logout'}">Wyloguj</a></li>
                     {elseif $user->role == "admin"}
-                    <li><a href="#">admin</a></li>
-                    <li><a href="#">TBA</a></li>
+                    <li><a href="{url action='workoutView'}">Dodaj Ćwiczenie</a></li>
                     <li><a href="{url action='logout'}">Wyloguj</a></li>
                     {/if}
                 </ul>

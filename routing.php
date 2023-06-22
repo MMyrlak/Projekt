@@ -12,4 +12,7 @@ Utils::addRoute('logout', 'LoginCtrl');
 Utils::addRoute('register', 'RegisterCtrl');
 Utils::addRoute('loginView', 'LoginCtrl');
 Utils::addRoute('registerView', 'RegisterCtrl');
+Utils::addRoute('workoutView', 'WorkoutCtrl');
+Utils::addRoute('addWorkout', 'WorkoutCtrl');
+
 //Utils::addRoute('action_name', 'controller_class_name');

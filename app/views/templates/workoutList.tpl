@@ -3,23 +3,16 @@
 {block name=bottom}
     <div class="wrapper">
         <div class="inner">
-            <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Lorem1</th>
-                        <th>Lorem2</th>
-                        <th>Lorem3</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Lorem ipsum</td>
-                        <td>Lorem ipsum</td>
-                        <td>Lorem ipsum</td>
-                    </tr>
-                </tbody>
-            </table>
+                <div class="workout">
+                    {foreach $workout as $elem}
+			<a href="#?id_workout={$elem["id_workout"]}" class="card">
+                            <img src="{$conf->app_url}/images/{$elem["photo"]}" alt="{$elem["name_workout"]}" style="width:100%">
+                            <div class="container">
+                                <p><b>{$elem["name_workout"]}</b></p> 
+                            </div>	
+			</a>	
+                    {/foreach}
+		</div>
             <ul class="pagination">
                 <li><a href="#" class="button small disabled">Prev</a></li>
                 <li><a href="#" class="page active">1</a></li>
@@ -29,5 +22,4 @@
             </ul>
             </div>
         </div>
-    </div>
 {/block}

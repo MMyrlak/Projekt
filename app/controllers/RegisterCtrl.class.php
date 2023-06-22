@@ -67,6 +67,7 @@ class RegisterCtrl {
 	}
 	public function generateView(){
                 App::getSmarty()->assign('msgs', App::getMessages()->getMessages());
+                App::getSmarty()->assign('msgs_count', App::getMessages()->getSize());
                 App::getSmarty()->assign('forms_view',$this->forms_view);
 		App::getSmarty()->assign('form',$this->form); // dane formularza do widoku
                 if($this->val) App::getSmarty()->display('workoutList.tpl');
