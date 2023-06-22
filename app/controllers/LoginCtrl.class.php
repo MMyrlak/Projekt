@@ -21,13 +21,11 @@ class LoginCtrl {
     public function __construct(){
 		$this->form = new LoginForm();
                 $this->forms_view = true;
-                $this->val = false;
         }
 	public function validate() {
                 if(isset($_SESSION['user'])) {
                      App::getSmarty()->assign('user',unserialize($_SESSION['user']));
                      $this->forms_view = false;
-                     $this->val = true;
                      $this->generateView();
                 } else {
                 $v = new Validator();
@@ -42,13 +40,11 @@ class LoginCtrl {
                                 'validator_message' => 'Brak loginu'
                               ]);
                 
-            $this->val = App::getMessages()->isEmpty();
-            return $this->val;
+            return $this->val = App::getMessages()->isEmpty();
             }
 	}
 
 	public function action_loginView(){
-                $this->val=false;
                 $this->forms_view = false;
                 $this->generateView();
             
@@ -64,10 +60,9 @@ class LoginCtrl {
                     $_SESSION['user'] = serialize($this->user);
                     $this->forms_view = false;
                     App::getSmarty()->assign('user',unserialize($_SESSION['user']));
-                    $this->generateView();
+                    header('Location: '. App::getConf()->app_url);
                 } else {
                     App::getMessages()->addMessage(new \core\Message("Niepoprawne haslo lub login", \core\Message::ERROR));
-                    $this->val = false;
                     $this->generateView();
                 }
             }
@@ -76,8 +71,7 @@ class LoginCtrl {
 	public function action_logout(){
 		session_destroy();
                 $this->forms_view = false;
-                $this->val = true;
-                $this->generateView();
+                header('Location: '. App::getConf()->app_url);
 	}	
 	
 	public function generateView(){
@@ -87,11 +81,7 @@ class LoginCtrl {
                 App::getSmarty()->assign('msgs_count', App::getMessages()->getSize());
                 App::getSmarty()->assign('forms_view',$this->forms_view);
 		App::getSmarty()->assign('form',$this->form); // dane formularza do widoku
-                if($this->val){
-                    App::getSmarty()->display('workoutList.tpl');
-                } else {
-                    App::getSmarty()->display('LoginView.tpl');
-                }    
+                App::getSmarty()->display('LoginView.tpl');
             }
     
 }
