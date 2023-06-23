@@ -82,31 +82,22 @@ class WorkoutCtrl {
                         "id_workout" => App::getDB()->id(),
                        ]);
                } catch (\PDOException $ex) {
-                echo $ex;
                 App::getMessages()->addMessage(new \core\Message($ex, \core\Message::WARNING));
                 }
                 if (!move_uploaded_file($this->form->tempphoto, $this->folder)) {
                     App::getMessages()->addMessage(new \core\Message("Nie przes³ano zdjêcia", \core\Message::WARNING));
                     $this->forms_view = true;
-                    $this->val = false;
                 }
+                $this->action_workoutView();
             }
-            
 	}	
 	
 	public function generateView(){
                 App::getSmarty()->assign('user',unserialize($_SESSION['user']));
                 App::getSmarty()->assign('forms_view',$this->forms_view);
-                App::getSmarty()->assign('form',$this->form);
                 App::getSmarty()->assign('msgs', App::getMessages()->getMessages());
                 App::getSmarty()->assign('msgs_count', App::getMessages()->getSize());
-                App::getSmarty()->assign('forms_view',$this->forms_view);
-		App::getSmarty()->assign('form',$this->form); // dane formularza do widoku
-                if($this->val){
-                    App::getSmarty()->display('workoutList.tpl');
-                } else {
-                    App::getSmarty()->display('AddWorkoutView.tpl');
-                }    
+                App::getSmarty()->display('AddWorkoutView.tpl');
             }
     
 }

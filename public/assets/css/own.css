@@ -19,8 +19,8 @@
     flex-direction: row;
     flex-wrap: wrap;
     padding-left: 0;
-    margin-top: -5%;
 }
+
 
 .card {
     border-radius: 15px;
@@ -30,6 +30,7 @@
     transition: 0.3s;
     width: 40%;
     flex: 0 0 30%;
+    height: 250px;
   }
   .card img{
     border-radius: 15px 15px 0 0;
@@ -39,6 +40,16 @@
   }
   
   .container {
-    padding: 2px 16px;
-    text-justify: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -9px;
+    width: 100%;
+    height: 25%
+  }
+  .container p{
+    text-align: center;
+    margin: auto;
+    width: 100%;
   }
