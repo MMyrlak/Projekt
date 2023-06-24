@@ -17,6 +17,7 @@ class workoutWebCtrl{
     private $workout;
     private $favorite;
     private $user_id;
+    private $body_part;
     public function __construct() {
         $this->forms_view = true;
         $this->favorite = 2;
@@ -28,6 +29,8 @@ class workoutWebCtrl{
             App::getRouter()->redirectTo("workoutListShow");
         }
         $this->workout= App::getDB()->select("workout", "*", ["id_workout" => $this->id]);
+        $this->body_part = App::getDB()->select("allocation", "id_body_parts", ["id_workout" => $this->id]);
+        $this->body_part = App::getDB()->select("body_parts", "name", ["id_body_parts" => $this->body_part[0]]);
         if (isset($_SESSION['user'])){
             $this->user_id = unserialize($_SESSION['user']);
             $this->user_id = get_object_vars($this->user_id);
@@ -59,6 +62,7 @@ class workoutWebCtrl{
     }
     public function generate_view(){
         if (isset($_SESSION['user'])) App::getSmarty()->assign('user',unserialize($_SESSION['user']));
+        App::getSmarty()->assign('bodyParts',$this->body_part[0]);
         App::getSmarty()->assign('forms_view',$this->forms_view);
         App::getSmarty()->assign('msgs', App::getMessages()->getMessages());
         App::getSmarty()->assign('msgs_count', App::getMessages()->getSize());
