@@ -14,7 +14,7 @@
     <div id="page-wrapper">
     <!-- Header -->
         <header id="header" class="alt">
-            <h1>Workout World</h1>
+            <h1>{$page_header|default:"Workout World"}</h1>
             <nav>
                 <a href="#menu">Menu</a>
             </nav>
@@ -47,7 +47,7 @@
     <!-- LOGO -->
     <section id="banner">
         <div class="inner">
-            <h2>Workout World</h2>
+            <h2>{$page_header|default:"Workout World"}</h2>
         </div>
     </section>
     <div class="inner">

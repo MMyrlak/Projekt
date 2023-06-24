@@ -12,8 +12,9 @@ Utils::addRoute('logout', 'LoginCtrl');
 Utils::addRoute('loginView', 'LoginCtrl');
 Utils::addRoute('register', 'RegisterCtrl');
 Utils::addRoute('registerView', 'RegisterCtrl');
+Utils::addRoute('workoutWebShow', 'workoutWebCtrl');
 //======USER=====
-//Utils::addRoute('workoutWebShow', 'workoutWebCtrl', ['user']);
+Utils::addRoute('favorite', 'workoutWebCtrl', ["user", "admin"]);
 //======ADMIN=====
 Utils::addRoute('workoutView', 'WorkoutCtrl',["admin"]);
 Utils::addRoute('addWorkout', 'WorkoutCtrl',["admin"]);

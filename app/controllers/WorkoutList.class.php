@@ -32,7 +32,9 @@ class WorkoutList {
             $this->form->body_parts = 0;
         } 
         if($this->form->body_parts > 0){
-            $this->workout=App::getDB()->select("workout", "*", ["id_body_parts" => $this->form->body_parts, 'LIMIT' => [($this->offset*10), (($this->offset*10)+25)]]);
+            $this->workout=App::getDB()->select("allocation", "id_workout", ["id_body_parts" => $this->form->body_parts, 'LIMIT' => [($this->offset*10), (($this->offset*10)+25)]]);
+            $this->workout=App::getDB()->select("workout", "*", ["id_workout" => $this->workout, 'LIMIT' => [($this->offset*10), (($this->offset*10)+25)]]);
+
         } else {
         $this->workout=App::getDB()->select("workout", "*", ['LIMIT' => [(intval($this->offset)*10), ((intval($this->offset)*10)+25)]]);
        }

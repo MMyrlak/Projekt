@@ -15,7 +15,6 @@ use core\App;
 class RegisterCtrl {
     private $form;
     private $forms_view;
-    private $val;
     public function __construct(){
 		$this->form = new RegisterForm();
                 $this->form->login = "";

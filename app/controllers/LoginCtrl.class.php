@@ -27,7 +27,7 @@ class LoginCtrl {
                 if(isset($_SESSION['user'])) {
                      App::getSmarty()->assign('user',unserialize($_SESSION['user']));
                      $this->forms_view = false;
-                     $this->generateView();
+                     App::getRouter()->forwardTo("workoutListShow");
                 } else {
                 $v = new Validator();
 		$this->form->login = $v->validateFromRequest("login", [
