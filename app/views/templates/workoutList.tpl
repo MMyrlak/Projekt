@@ -1,27 +1,24 @@
 {extends file="main.tpl"}
-{block name=top}  {include file='messages.tpl'} {/block}
+    {block name=top}
+        <div class="col-6 col-12-xsmall" style='width: 50%; margin: auto'>
+                <form id="body_parts" onsumbit="ajaxPostForm('body_parts','{url action='workoutPartListShow'}','workoutTable'); return false;">
+                <select id="body_parts_select" name="body_parts_select">
+                        <option value="0">----</option>
+                        {foreach $body_parts as $body}
+                        {strip}
+                            <option value='{$body["id_body_parts"]}'>{$body["name"]}</option>
+                        {/strip}
+                    {/foreach}
+                    </select>
+                    <button type="submit" class="primary">Filtruj</button>
+        </form>
+    </div>           
+    {/block}
+    
 {block name=bottom}
     <div class="wrapper">
-        <div class="inner">
-            <ul class="pagination">
-                <li><a href="{url action='workoutListShow'}/{$offset-1}" class="button small {if $offset==0} disabled {/if}">Prev</a></li>
-                <li><a href="{url action='workoutListShow'}/{$offset+1}" class="button small {if $workout_count<13}disabled{/if}">Next</a></li>
-            </ul>
-                <div class="workout">
-                    {foreach $workout as $elem}
-                        {if $elem@iteration == 13}{break}{/if}
-			<a href="{url action='workoutWebShow'}/{$elem["id_workout"]}" class="card">
-                            <img src="{$conf->app_url}/images/{$elem["photo"]}" alt="{$elem["name_workout"]}" style="width:100%">
-                            <div class="container">
-                                <p><b>{$elem["name_workout"]}</b></p> 
-                            </div>	
-			</a>	
-                    {/foreach}
-		</div>
-                <ul class="pagination">
-                <li><a href="{url action='workoutListShow'}/{$offset-1}" class="button small {if $offset==0} disabled {/if}">Prev</a></li>
-                <li><a href="{url action='workoutListShow'}/{$offset+1}" class="button small {if $workout_count<13}disabled{/if}">Next</a></li>
-            </ul>
-            </div>
+        {include file='messages.tpl'}
+        <div class="inner" id="workoutTable">
+        {include file='workoutTable.tpl'}
         </div>
 {/block}

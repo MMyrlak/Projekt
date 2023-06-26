@@ -19,7 +19,6 @@
                             <option value='{$body["name"]}'>{$body["name"]}</option>
                         {/strip}
                     {/foreach}
-                        
                     </select>
                 </div>
                 <div class="col-6 col-12-xsmall">

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{$conf->app_url}/assets/css/own.css" />
     <noscript><link rel="stylesheet" href="{$conf->app_url}/assets/css/noscript.css" /></noscript>
     <script src="https://kit.fontawesome.com/cfee8e482b.js" crossorigin="anonymous"></script>
+    
 </head>
 <body class="is-preload">
     <!-- Page Wrapper -->
@@ -32,10 +33,10 @@
                     <li><a href="{url action='loginView'}">Zaloguj</a></li>
                     <li><a href="{url action='registerView'}">Zarejestruj</a></li>
                     {elseif $user->role == "user"}
-                    <li><a href="#">Konto</a></li>
-                    <li><a href="#">TBA</a></li>
+                    <li><a href="{url action='myAccount'}">{$user->login}</a></li>
                     <li><a href="{url action='logout'}">Wyloguj</a></li>
                     {elseif $user->role == "admin"}
+                    <li><a href="{url action='myAccount'}">{$user->login}</a></li>
                     <li><a href="{url action='workoutView'}">Dodaj Ćwiczenie</a></li>
                     <li><a href="{url action='logout'}">Wyloguj</a></li>
                     {/if}
@@ -52,19 +53,21 @@
     </section>
     <div class="inner">
         {block name=top}{/block}
-        {block name=bottom} Default page content{/block}
+        {block name=bottom}Default page content{/block}
     </div>
     <!-- Footer -->
         <section id="footer">
             <div class="inner">
                 <ul class="copyright">
-                    <li>&copy; Untitled Inc. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-                    <li>&copy; Mikołaj Myrlak. 2023</li></li>
+                    <li>&copy; Mikołaj Myrlak. 2023</li>
+                    <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                    <li><a href="https://www.fabrykasily.pl/atlas-cwiczen"> Fabryka Siły </a></li>
                 </ul>
             </div>
         </section>
     </div>
 <!-- Scripts -->
+<script src="{$conf->app_url}/assets/js/ajax.js"></script>
 <script src="{$conf->app_url}/assets/js/jquery.min.js"></script>
 <script src="{$conf->app_url}/assets/js/jquery.scrollex.min.js"></script>
 <script src="{$conf->app_url}/assets/js/browser.min.js"></script>
