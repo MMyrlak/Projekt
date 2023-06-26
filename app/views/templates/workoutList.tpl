@@ -5,7 +5,7 @@
                         <option value="0">----</option>
                         {foreach $body_parts as $body}
                         {strip}
-                            <option value='{url action="workoutListShow"}/0/{$body["id_body_parts"]}'>{$body["name"]}</option>
+                            <option value='{url action="workoutListShow"}/0/{$body["id_body_parts"]}' {if $body_parts_offset == $body["id_body_parts"]} selected="selected" {/if}>{$body["name"]}</option>
                         {/strip}
                     {/foreach}
                     </select>
