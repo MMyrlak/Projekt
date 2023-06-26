@@ -6,8 +6,8 @@
             {if $workout_count > 0}
                 <h1>Ulubione:</h1>
                     <ul class="pagination">
-                        <li><a href="{url action='myAccount'}/{$offset-1}" class="button small {if $offset==0} disabled {/if}">Prev</a></li>
-                        <li><a href="{url action='myAccount'}/{$offset+1}" class="button small {if $workout_count<13}disabled{/if}">Next</a></li>
+                        <li><a href="{url action='myAccount'}/{$offset-1}" class="button small {if $offset==0} disabled {/if}" style="pointer-events: {if $offset==0} none {else} auto {/if}">Prev</a></li>
+                        <li><a href="{url action='myAccount'}/{$offset+1}" class="button small {if $workout_count<13}disabled{/if}" style="pointer-events: {if $workout_count<13} none {else} auto {/if}">Next</a></li>
                     </ul>
             {else} 
                 <h1>Brak ulubionych</h1>

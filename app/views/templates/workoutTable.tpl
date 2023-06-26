@@ -15,7 +15,8 @@
                     {/foreach}
 		</div>
                 <ul class="pagination">
-                    <li><a href="{url action='workoutListShow'}/{$offset-1}/{$body_parts_offset}" class="button small {if $offset==0} disabled {/if}" style="pointer-events: {if $offset==0} none {else} auto {/if}">Prev</a></li>
+                    <li><a href="{url action='workoutListShow'}/{$offset-1}/{$body_parts_offset}" class="button small {if $offset==0} 
+                           disabled {/if}" style="pointer-events: {if $offset==0} none {else} auto {/if}">Prev</a></li>
                 <li><a href="{url action='workoutListShow'}/{$offset+1}/{$body_parts_offset}" class="button small {if $workout_count<13}disabled{/if}" style="pointer-events: {if $workout_count<13} none {else} auto {/if}">Next</a></li>
             </ul>
 </div>
